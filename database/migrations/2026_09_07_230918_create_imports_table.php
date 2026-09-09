@@ -17,9 +17,10 @@ return new class extends Migration
             $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('CASCADE');
             $table->string('external_import_id');
             $table->timestamp('sent_at');
+            $table->json('offers_data');
             $table->string('status')->default(ImportStatus::PENDING);
-            $table->integer('total_offers');
-            $table->integer('processed_offers');
+            $table->integer('total_offers')->nullable();
+            $table->integer('processed_offers')->nullable();
             $table->string('error')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();

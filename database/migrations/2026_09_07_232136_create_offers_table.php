@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OfferReservationStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,6 @@ return new class extends Migration
             $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('CASCADE');
             $table->foreignId('import_id')->constrained('imports')->onDelete('CASCADE');
             $table->string('external_id');
-            $table->foreignId('property_id')->nullable()->constrained('property')->onDelete('SET NULL');
             $table->date('check_in');
             $table->date('check_out');
             $table->integer('max_guests');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('currency');
             $table->integer('available_units');
             $table->timestamp('expires_at');
+            $table->string('reservation_status')->default(OfferReservationStatus::AVAILABLE);
             $table->timestamps();
 
 

@@ -18,6 +18,6 @@ class Reservation extends Model
 
     public function offer(): BelongsTo
     {
-        $this->belongsTo(Offer::class);
+        return $this->belongsTo(Offer::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Property extends Model
 {
@@ -12,5 +13,11 @@ class Property extends Model
         'code',
         'name',
         'city',
+        'offer_id',
     ];
+
+    public function offer(): BelongsTo
+    {
+        return $this->belongsTo(Offer::class);
+    }
 }
