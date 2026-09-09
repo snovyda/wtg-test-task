@@ -9,7 +9,7 @@ use App\Http\Resources\ImportCreatedResource;
 use App\Jobs\ImportOffers;
 use App\Models\Import;
 use App\Models\Supplier;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Symfony\Component\HttpFoundation\Response;
 
 class ImportCreateController extends Controller
@@ -19,6 +19,16 @@ class ImportCreateController extends Controller
         $validatedData = $request->validated();
 
         $supplier = Supplier::findByName($validatedData['supplier']);
+
+        $existingImport = Import::where('supplier_id', $supplier->id)
+            ->where('external_import_id', $validatedData['external_import_id'])
+            ->first()
+        ;
+
+        if (!empty($existingImport)) {
+            return response()->json(['message' => 'Import already exists'], Response::HTTP_OK);
+        }
+
         $validatedData['offers_data'] = $validatedData['offers'];
         $validatedData['supplier_id'] = $supplier->id;
         $validatedData['sent_at'] = Carbon::parse($validatedData['sent_at'])->toDateTimeString();
