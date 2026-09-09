@@ -17,9 +17,7 @@ class ImportStatusResource extends JsonResource
         return [
             'data' => [
                 'id' => $this->id,
-                'supplier' => $this->whenLoaded('supplier', function () {
-                    return $this->supplier->name;
-                }),
+                'supplier' => $this->whenLoaded('supplier', fn() => $this->supplier->name),
                 'external_import_id' => $this->external_import_id,
                 'sent_at' => $this->sent_at?->format('Y-m-d\TH:i:s\Z'),
                 'status' => $this->status,
