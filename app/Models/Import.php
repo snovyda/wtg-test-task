@@ -15,10 +15,18 @@ class Import extends Model
         'external_import_id',
         'sent_at',
         'status',
+        'offers_data',
         'total_offers',
         'processed_offers',
         'error',
         'completed_at',
+    ];
+
+    protected $casts = [
+        'offers_data' => 'array',
+        'sent_at' => 'datetime:Y-m-d\TH:i:s\Z',
+        'created_at' => 'datetime:Y-m-d\TH:i:s\Z',
+        'completed_at' => 'datetime:Y-m-d\TH:i:s\Z',
     ];
 
     public function supplier(): BelongsTo

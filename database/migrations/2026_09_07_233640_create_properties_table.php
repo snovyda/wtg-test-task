@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->string('city');
+            $table->foreignId('offer_id')->nullable()->constrained('offers')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
